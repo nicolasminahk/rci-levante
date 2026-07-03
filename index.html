@@ -241,8 +241,30 @@ section{ position: relative; padding: 96px 0; }
 .glass-icon:hover svg{ stroke: var(--rojo-rci); }
 
 /* ============================================================
-   ATMÓSFERA GLOBAL — orbes + grano fílmico
+   ATMÓSFERA GLOBAL — escena de fondo + orbes + grano fílmico
    ============================================================ */
+/* Escena fija detrás de todo: asoma exactamente donde las secciones
+   no tienen fondo propio (stats, pilares, acompañamiento, footer) */
+.bg-scene{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("media/fondo-auto.jpg");
+  background-size: cover;
+  background-position: center 72%;
+  pointer-events: none;
+}
+.bg-scene::after{
+  content:"";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(10,10,11,.94) 0%,
+    rgba(10,10,11,.72) 45%,
+    rgba(10,10,11,.60) 72%,
+    rgba(10,10,11,.88) 100%);
+}
+
 .orbs{ position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .orb{
   position: absolute;
@@ -546,7 +568,6 @@ section{ position: relative; padding: 96px 0; }
   flex-wrap: wrap;
   gap: 14px;
 }
-.hero-kicker{ margin-bottom: 24px; }
 
 .scroll-hint{
   position: absolute;
@@ -1331,6 +1352,7 @@ section{ position: relative; padding: 96px 0; }
 </div>
 
 <!-- Atmósfera -->
+<div class="bg-scene" aria-hidden="true"></div>
 <div class="orbs" aria-hidden="true">
   <div class="orb orb--rojo"></div>
   <div class="orb orb--plata"></div>
@@ -1383,7 +1405,6 @@ section{ position: relative; padding: 96px 0; }
       </div>
 
       <div class="container hero-inner" data-depth="-8">
-        <p class="label hero-kicker">Coches a la carta · Importación europea</p>
         <h1>
           <span class="line"><span class="line-inner">Tu coche,</span></span>
           <span class="line"><span class="line-inner">a la carta<span class="accent">.</span></span></span>
@@ -1821,8 +1842,7 @@ if (hasGSAP && !reduceMotion) {
     }, intro ? "-=0.35" : 0)
     /* barrido metálico del titular */
     .to(".hero h1 .line-inner", { backgroundPosition: "0% 50%", duration: 1.4, ease: "power2.inOut", stagger: 0.1 }, "-=0.5")
-    .from(".hero-kicker", { opacity: 0, y: 20, filter: "blur(6px)", duration: .7 }, "<-0.2")
-    .from(".hero-sub",    { opacity: 0, y: 24, filter: "blur(6px)", duration: .7 }, "-=0.9")
+    .from(".hero-sub",    { opacity: 0, y: 24, filter: "blur(6px)", duration: .7 }, "-=1.1")
     /* sin blur: los CTAs son glass y el filter les rompe el backdrop */
     .from(".hero-ctas",   { opacity: 0, y: 24, duration: .7 }, "-=0.5")
     .from(".speed-lines span", { xPercent: -140, opacity: 0, duration: 1.1, ease: "power2.out", stagger: 0.07 }, "-=0.9")
