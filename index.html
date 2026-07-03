@@ -13,7 +13,13 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- La foto del hero es lo primero que se ve: máxima prioridad -->
+<link rel="preload" as="image" href="media/hero-static.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="media/logo-rci.png">
+<!-- Fuentes sin bloquear el primer render (swap + carga asíncrona) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Inter:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <style>
 /* ============================================================
@@ -59,6 +65,7 @@ body{
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 button{ font:inherit; cursor:pointer; }
+b,strong{ font-weight: 600; } /* Inter se carga hasta 600 */
 
 /* ---------- Tipografía ---------- */
 h1,h2,h3{
@@ -1290,7 +1297,10 @@ section{ position: relative; padding: 96px 0; }
   :root{ --blur-glass: 16px; }
   section{ padding: 72px 0; }
   .hero-ctas .glass-btn{ width: 100%; min-height: 52px; }
-  .orb{ filter: blur(80px); }
+  /* alivio de composición en móvil: menos capas activas por frame */
+  .orb{ filter: blur(80px); animation: none; }
+  .orb--rojo2{ display: none; }
+  .grain{ display: none; }
   .nav-cta{ font-size: 10.5px; padding: 10px 14px; letter-spacing: .09em; }
   .brand-logo{ height: 46px; width: 100px; }
   .footer .brand-logo{ height: 64px; width: 139px; }
@@ -1361,10 +1371,8 @@ section{ position: relative; padding: 96px 0; }
         <div class="hero-media" data-depth="14">
           <div class="hero-media-inner" id="hero-media-inner">
             <div class="media-fallback"></div>
-            <img src="media/hero-static.jpg" alt="" onerror="this.remove()">
-            <video autoplay muted loop playsinline preload="metadata" onerror="this.remove()">
-              <source src="media/hero-loop.mp4" type="video/mp4" onerror="this.parentElement.remove()">
-            </video>
+            <img src="media/hero-static.jpg" alt="" width="1376" height="768"
+                 fetchpriority="high" decoding="async" onerror="this.remove()">
           </div>
         </div>
         <div class="hero-overlay" aria-hidden="true"></div>
@@ -1547,7 +1555,8 @@ section{ position: relative; padding: 96px 0; }
     <div class="taller-frame media-frame">
       <div class="taller-bg">
         <div class="media-fallback"></div>
-        <img src="media/workshop-static.jpg" alt="Mecánico de RCI revisando los frenos de un deportivo en el taller" id="taller-img" onerror="this.remove()">
+        <img src="media/workshop-static.jpg" alt="Mecánico de RCI revisando los frenos de un deportivo en el taller" id="taller-img"
+             width="1376" height="768" loading="lazy" decoding="async" onerror="this.remove()">
         <div class="taller-overlay"></div>
       </div>
       <div class="taller-marquee" id="taller-marquee" aria-hidden="true">
@@ -1597,7 +1606,8 @@ section{ position: relative; padding: 96px 0; }
         </div>
 
         <div class="caso-media media-frame">
-          <img src="media/rs3-static.jpg" alt="Audi RS3 2024 importado por RCI Levante" id="rs3-img" onerror="this.remove()">
+          <img src="media/rs3-static.jpg" alt="Audi RS3 2024 importado por RCI Levante" id="rs3-img"
+               width="1376" height="768" loading="lazy" decoding="async" onerror="this.remove()">
           <span class="glass-card spec-chip">Revisión completa · Entrega en tu puerta</span>
         </div>
       </div>
@@ -1623,7 +1633,8 @@ section{ position: relative; padding: 96px 0; }
         </div>
 
         <div class="coaching-media media-frame" id="coaching-media">
-          <img src="media/coaching-static.jpg" alt="Mano de un asesor de RCI al volante" id="coaching-img" onerror="this.remove()">
+          <img src="media/coaching-static.jpg" alt="Mano de un asesor de RCI al volante" id="coaching-img"
+               width="1376" height="768" loading="lazy" decoding="async" onerror="this.remove()">
         </div>
       </div>
     </div>
@@ -1699,6 +1710,7 @@ section{ position: relative; padding: 96px 0; }
   <div class="container footer-inner">
     <a class="brand" href="#inicio" aria-label="RCI Levante Automotive">
       <img class="brand-logo" src="media/logo-rci.png" alt="RCI Levante Automotive"
+           loading="lazy" decoding="async"
            onerror="this.parentElement.classList.add('no-logo'); this.remove()">
       <span class="brand-text">
         <span class="brand-main">RCI<em>.</em></span>
@@ -1772,7 +1784,18 @@ onScroll();
 /* ============================================================
    INTRO + ENTRADA DEL HERO — una sola timeline maestra
    ============================================================ */
-const intro = document.getElementById("intro");
+let intro = document.getElementById("intro");
+
+/* La intro solo en la primera visita de la sesión: las navegaciones
+   siguientes van directas al contenido */
+try {
+  if (intro && sessionStorage.getItem("rci-intro")) {
+    intro.remove();
+    intro = null;
+  } else if (intro) {
+    sessionStorage.setItem("rci-intro", "1");
+  }
+} catch(e){ /* modo privado sin storage: intro normal */ }
 
 if (hasGSAP && !reduceMotion) {
   const master = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -1780,11 +1803,11 @@ if (hasGSAP && !reduceMotion) {
   if (intro) {
     intro.style.animation = "none"; // el JS toma el control de la intro
     master
-      .to(".intro-logo", { opacity: 1, duration: .7, ease: "power2.out",
+      .to(".intro-logo", { opacity: 1, duration: .5, ease: "power2.out",
           startAt: { scale: 1.08, filter: "blur(14px)" }, scale: 1, filter: "blur(0px)" })
-      .to(".intro-sweep", { xPercent: 220, duration: .8, ease: "power2.inOut" }, "-=0.25")
-      .to(intro, { clipPath: "inset(0 0 100% 0)", duration: .7, ease: "power3.inOut",
-          onComplete(){ intro.remove(); } }, "+=0.15");
+      .to(".intro-sweep", { xPercent: 220, duration: .6, ease: "power2.inOut" }, "-=0.3")
+      .to(intro, { clipPath: "inset(0 0 100% 0)", duration: .5, ease: "power3.inOut",
+          onComplete(){ intro.remove(); } }, "+=0.05");
   }
 
   master
@@ -1859,15 +1882,6 @@ if (hasGSAP && !reduceMotion) {
     scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 }
   });
 }
-
-/* Fallback de vídeo */
-(function heroVideo(){
-  const video = document.querySelector(".hero-media video");
-  if (!video) return;
-  video.addEventListener("error", () => video.remove());
-  const p = video.play?.();
-  if (p && p.catch) p.catch(() => {});
-})();
 
 /* ============================================================
    REVEALS — patrón plano y patrón 3D
