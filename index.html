@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>RCI Levante Automotive — Tu coche a la carta, hasta un 15% menos</title>
-<meta name="description" content="Importación de coches de Europa a la carta. Compraventa de vehículos de segunda mano premium: lo buscamos en toda Europa, lo revisamos en talleres propios y te lo entregamos hasta un 15% por debajo del mercado español.">
+<title>RCI Levante Automotive — Tu coche a la carta</title>
+<meta name="description" content="Deja de perder horas entre anuncios. Cuéntanos qué coche buscas y lo encontramos por ti: asesoría real, revisión completa en taller propio y entrega con garantía en tu puerta.">
 <meta property="og:title" content="RCI Levante Automotive — Tu coche a la carta">
-<meta property="og:description" content="Lo buscamos en toda Europa. Lo preparamos en nuestros talleres. Te lo entregamos hasta un 15% por debajo del mercado español.">
+<meta property="og:description" content="Cuéntanos qué coche buscas y lo encontramos por ti: asesoría real, al mejor precio y con la mejor garantía.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="media/hero-static.jpg">
 <meta property="og:locale" content="es_ES">
@@ -906,17 +906,6 @@ section{ position: relative; padding: 96px 0; }
   font-size: clamp(30px, 4vw, 44px);
   color: var(--plata-oscura);
 }
-.price-market .strike{
-  position: absolute;
-  left: -3%;
-  top: 52%;
-  width: 106%;
-  height: 2px;
-  background: var(--rojo-rci);
-  transform: scaleX(0);
-  transform-origin: left center;
-  border-radius: 2px;
-}
 .price-rci{
   display: inline-block;
   font-size: clamp(46px, 6.5vw, 72px);
@@ -1058,7 +1047,7 @@ section{ position: relative; padding: 96px 0; }
    ============================================================ */
 .pedido{ background: var(--negro-panel); }
 .form-card{
-  max-width: 720px;
+  max-width: 840px;
   margin-inline: auto;
   padding: 44px 28px;
 }
@@ -1067,6 +1056,64 @@ section{ position: relative; padding: 96px 0; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+}
+.form-block{ margin-bottom: 44px; }
+.form-block-head{
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.fb-num{
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-size: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--rojo-rci);
+}
+.form-block-head h3{
+  font-size: 13px;
+  letter-spacing: .24em;
+}
+.form-block .field + .field{ margin-top: 20px; }
+.form-block > .field{ margin-bottom: 20px; }
+.chips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip{
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-stretch: 115%;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--plata-oscura);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  transition: color 200ms ease-out, border-color 200ms ease-out, background 200ms ease-out;
+}
+.chip:hover{ color: var(--blanco); border-color: rgba(255,255,255,.26); }
+.chip.is-active{
+  color: var(--blanco);
+  border-color: rgba(216,35,42,.65);
+  background: rgba(216,35,42,.10);
+}
+.links-stack{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hint{
+  margin-top: 7px;
+  font-size: 12.5px;
+  color: var(--plata-oscura);
 }
 .field label{
   display: block;
@@ -1410,8 +1457,8 @@ section{ position: relative; padding: 96px 0; }
           <span class="line"><span class="line-inner">a la carta<span class="accent">.</span></span></span>
         </h1>
         <p class="hero-sub">
-          Buscado en Europa. Preparado en taller propio.
-          <strong>Hasta un 15% menos.</strong>
+          Deja de buscar: lo encontramos por ti,
+          <strong>al mejor precio y con la mejor garantía.</strong>
         </p>
         <div class="hero-ctas">
           <a href="#pedido" class="glass-btn glass-btn--primary">Buscamos tu coche <span class="arrow">→</span></a>
@@ -1431,8 +1478,8 @@ section{ position: relative; padding: 96px 0; }
     <div class="container">
       <div class="stats-row" id="stats-row" data-reveal>
         <div class="stat stat-accent">
-          <span class="stat-num num-xxl">−<span class="count" data-count="15" data-suffix="">15</span><span class="u">%</span></span>
-          <span class="stat-label">vs mercado español</span>
+          <span class="stat-num num-xxl"><span class="count" data-count="1" data-suffix="">1</span><span class="u"></span></span>
+          <span class="stat-label">Asesor dedicado</span>
         </div>
         <div class="stat">
           <span class="stat-num num-xxl"><span class="count" data-count="120" data-suffix="">120</span>+<span class="u"></span></span>
@@ -1443,8 +1490,8 @@ section{ position: relative; padding: 96px 0; }
           <span class="stat-label">Respuesta</span>
         </div>
         <div class="stat">
-          <span class="stat-num num-xxl">0<span class="u">€</span></span>
-          <span class="stat-label">Hasta la compra</span>
+          <span class="stat-num num-xxl"><span class="count" data-count="100" data-suffix="">100</span><span class="u">%</span></span>
+          <span class="stat-label">A tu medida</span>
         </div>
       </div>
     </div>
@@ -1485,8 +1532,8 @@ section{ position: relative; padding: 96px 0; }
               <circle cx="15.2" cy="14.8" r="1.3" fill="#D8232A" stroke="none"/>
             </svg>
           </span>
-          <h3>Lo encontramos en Europa</h3>
-          <p>Por debajo del precio español.</p>
+          <h3>Lo encontramos por ti</h3>
+          <p>Filtramos el mercado hasta dar con el que encaja.</p>
         </article>
 
         <article class="glass-card step-card tilt-card" data-reveal-3d>
@@ -1520,6 +1567,7 @@ section{ position: relative; padding: 96px 0; }
       <div class="section-head" data-reveal>
         <p class="label">Por qué RCI</p>
         <h2>Tres razones, cero letra pequeña</h2>
+        <p>Comprar coche son semanas de anuncios, llamadas y visitas a ciegas. Nosotros hacemos ese trabajo por ti.</p>
       </div>
 
       <div class="pilares-grid">
@@ -1531,8 +1579,8 @@ section{ position: relative; padding: 96px 0; }
               <path d="M8.5 16.5l6-6" opacity=".7"/>
             </svg>
           </span>
-          <h3>Precio real</h3>
-          <p>Mínimo un 10–15% por debajo del mercado español.</p>
+          <h3>Mejor precio</h3>
+          <p>Negociamos por ti y lo conseguimos al mejor precio del mercado.</p>
         </article>
 
         <article class="glass-card pilar-card tilt-card" data-reveal-3d>
@@ -1550,8 +1598,8 @@ section{ position: relative; padding: 96px 0; }
               <path d="M15.8 2.5a10 10 0 0 1 4.6 4" opacity=".8"/>
             </svg>
           </span>
-          <h3>Mecánica garantizada</h3>
-          <p>Revisado a fondo antes de entregarse.</p>
+          <h3>Mejor garantía</h3>
+          <p>Revisado a fondo en taller propio y entregado con garantía.</p>
         </article>
 
         <article class="glass-card pilar-card tilt-card" data-reveal-3d>
@@ -1564,8 +1612,8 @@ section{ position: relative; padding: 96px 0; }
               </g>
             </svg>
           </span>
-          <h3>Acompañamiento total</h3>
-          <p>Un asesor humano, gratis hasta la compra.</p>
+          <h3>Asesoría real</h3>
+          <p>Un asesor de verdad te guía — incluso hacia opciones que no habías contemplado.</p>
         </article>
       </div>
     </div>
@@ -1607,22 +1655,23 @@ section{ position: relative; padding: 96px 0; }
           <p class="caso-model">Audi RS3 <span>· 2024</span></p>
 
           <div class="price-row" id="row-market">
-            <p class="price-label">Precio de mercado en España</p>
-            <span class="price-market num-xxl">~<span class="count" data-count="68000" data-suffix=" €">0 €</span><span class="strike" aria-hidden="true"></span></span>
+            <p class="price-label">Anuncios filtrados por RCI</p>
+            <span class="price-market num-xxl"><span class="count" data-count="127" data-suffix="">0</span></span>
           </div>
 
           <div class="price-row" id="row-rci">
-            <p class="price-label">Precio RCI</p>
-            <span class="price-rci num-xxl"><span class="count" data-count="63900" data-suffix=" €">0 €</span></span>
-            <span class="price-note">Revisado y garantizado</span>
+            <p class="price-label">Días hasta la entrega</p>
+            <span class="price-rci num-xxl"><span class="count" data-count="9" data-suffix="">0</span></span>
+            <span class="price-note">Revisado y con garantía</span>
           </div>
 
           <span class="glass-card badge-ahorro">
-            Ahorro <span class="pct">~<span class="count" data-count="10" data-suffix="%">0%</span></span>
+            <span class="pct">✓</span> Encargo cumplido
           </span>
 
           <p class="caso-micro">
-            Más barato y en mejor estado que cualquier comparable.
+            El cliente nos pasó un enlace y no volvió a mirar un anuncio.
+            Nueve días después lo tenía en su garaje.
           </p>
         </div>
 
@@ -1643,9 +1692,10 @@ section{ position: relative; padding: 96px 0; }
           <p class="label">Acompañamiento</p>
           <h2 style="font-size:clamp(28px,4vw,46px);margin-top:18px;">No te vendemos un coche.<br>Te ayudamos a comprarlo bien.</h2>
           <p>
-            La misma persona del primer mensaje a la entrega: versión, kilometraje,
-            historial, precio justo.
-            <strong>Gratis hasta el momento de la compra.</strong>
+            La misma persona del primer mensaje a la entrega. Te orientamos con
+            criterio — versión, kilometraje, historial, precio justo — <strong>incluso
+            hacia un coche distinto al que traías en mente, si es el que de verdad
+            te conviene.</strong>
           </p>
           <blockquote class="quote glass-card">
             Si lo que buscas no tiene sentido para tu presupuesto, te lo decimos —
@@ -1671,50 +1721,170 @@ section{ position: relative; padding: 96px 0; }
         </div>
 
         <form id="pedido-form" novalidate>
-          <div class="form-grid">
-            <div class="field">
-              <label for="f-nombre">Nombre</label>
-              <input type="text" id="f-nombre" name="nombre" autocomplete="name" placeholder="Tu nombre">
-              <p class="field-error">Dinos cómo te llamas.</p>
-            </div>
 
-            <div class="field">
-              <label for="f-whatsapp">WhatsApp</label>
-              <input type="tel" id="f-whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="+34 600 000 000">
-              <p class="field-error">Necesitamos un número válido para responderte.</p>
+          <!-- 01 · Datos del cliente -->
+          <div class="form-block">
+            <div class="form-block-head"><span class="fb-num">01</span><h3>Datos del cliente</h3></div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-nombre">Nombre y apellidos</label>
+                <input type="text" id="f-nombre" name="nombre" autocomplete="name" placeholder="Juan García López">
+                <p class="field-error">Dinos cómo te llamas.</p>
+              </div>
+              <div class="field">
+                <label for="f-whatsapp">Teléfono / WhatsApp</label>
+                <input type="tel" id="f-whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="+34 600 000 000">
+                <p class="field-error">Necesitamos un número válido para responderte.</p>
+              </div>
+              <div class="field">
+                <label for="f-email">Correo electrónico <span class="opt">(opcional)</span></label>
+                <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" placeholder="tu@email.com">
+                <p class="field-error">Ese correo no parece válido.</p>
+              </div>
+              <div class="field">
+                <label for="f-ciudad">Ciudad / Provincia <span class="opt">(opcional)</span></label>
+                <input type="text" id="f-ciudad" name="ciudad" autocomplete="address-level2" placeholder="Valencia">
+              </div>
             </div>
+          </div>
 
+          <!-- 02 · Vehículo deseado -->
+          <div class="form-block">
+            <div class="form-block-head"><span class="fb-num">02</span><h3>Vehículo deseado</h3></div>
             <div class="field field--full">
-              <label for="f-coche">¿Qué coche buscas?</label>
-              <textarea id="f-coche" name="coche" placeholder="Modelo, versión, color, kilometraje máximo… todo lo que tengas claro"></textarea>
-              <p class="field-error">Cuéntanos al menos el modelo que tienes en mente.</p>
+              <label id="lbl-tipo">Tipología</label>
+              <div class="chips" id="chips-tipo" role="group" aria-labelledby="lbl-tipo">
+                <button type="button" class="chip" data-value="SUV / 4x4">SUV / 4×4</button>
+                <button type="button" class="chip" data-value="Berlina">Berlina</button>
+                <button type="button" class="chip" data-value="Familiar">Familiar</button>
+                <button type="button" class="chip" data-value="Compacto">Compacto</button>
+                <button type="button" class="chip" data-value="Deportivo">Deportivo</button>
+                <button type="button" class="chip" data-value="Cabrio">Cabrio</button>
+                <button type="button" class="chip" data-value="Furgoneta">Furgoneta</button>
+                <button type="button" class="chip" data-value="Pick-up">Pick-up</button>
+              </div>
             </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-marca">Marca preferida</label>
+                <select id="f-marca" name="marca">
+                  <option selected>Indiferente</option>
+                  <option>Audi</option><option>BMW</option><option>Mercedes-Benz</option>
+                  <option>Porsche</option><option>Volkswagen</option><option>Cupra</option>
+                  <option>Seat</option><option>Toyota</option><option>Ford</option>
+                  <option>Peugeot</option><option>Renault</option><option>Kia</option>
+                  <option>Hyundai</option><option>Tesla</option><option>Otra</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-modelo">Modelo</label>
+                <input type="text" id="f-modelo" name="modelo" placeholder="RS3, M3, Golf GTI…">
+              </div>
+              <div class="field">
+                <label for="f-anio">Año mínimo</label>
+                <select id="f-anio" name="anio">
+                  <option selected>Indiferente</option>
+                  <option>2025</option><option>2024</option><option>2023</option>
+                  <option>2022</option><option>2021</option><option>2020</option>
+                  <option>2019</option><option>2018</option><option>2017</option>
+                  <option>2016</option><option>Anterior a 2016</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-km">Kilometraje máximo</label>
+                <select id="f-km" name="km">
+                  <option selected>Indiferente</option>
+                  <option>10.000 km</option><option>30.000 km</option><option>60.000 km</option>
+                  <option>100.000 km</option><option>150.000 km</option><option>Más de 150.000 km</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-combustible">Combustible</label>
+                <select id="f-combustible" name="combustible">
+                  <option selected>Indiferente</option>
+                  <option>Gasolina</option><option>Diésel</option><option>Híbrido</option>
+                  <option>Híbrido enchufable</option><option>Eléctrico</option><option>GLP</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-transmision">Transmisión</label>
+                <select id="f-transmision" name="transmision">
+                  <option selected>Indiferente</option>
+                  <option>Automático</option><option>Manual</option>
+                </select>
+              </div>
+              <div class="field field--full">
+                <label for="f-extras">Equipamiento imprescindible / extras</label>
+                <textarea id="f-extras" name="extras" placeholder="Tapicería de cuero, techo panorámico, pack M, navegador, asientos calefactables…"></textarea>
+              </div>
+              <div class="field field--full">
+                <label>Enlaces de referencia <span class="opt">— máximo 3, opcional</span></label>
+                <div class="links-stack">
+                  <input type="url" class="link-ref" inputmode="url" placeholder="https://es.wallapop.com/…">
+                  <input type="url" class="link-ref" inputmode="url" placeholder="https://www.coches.net/…">
+                  <input type="url" class="link-ref" inputmode="url" placeholder="https://www.milanuncios.com/…">
+                </div>
+                <p class="hint">Pega aquí los anuncios concretos que te interesen.</p>
+                <p class="field-error">Alguno de los enlaces no parece válido.</p>
+              </div>
+            </div>
+          </div>
 
-            <div class="field">
-              <label for="f-presupuesto">Presupuesto</label>
-              <select id="f-presupuesto" name="presupuesto" required>
-                <option value="" selected disabled>Selecciona un rango</option>
-                <option>Hasta 25.000 €</option>
-                <option>25.000 – 40.000 €</option>
-                <option>40.000 – 60.000 €</option>
-                <option>60.000 – 90.000 €</option>
-                <option>Más de 90.000 €</option>
-              </select>
-              <p class="field-error">Elige un rango orientativo.</p>
+          <!-- 03 · Presupuesto y pago -->
+          <div class="form-block">
+            <div class="form-block-head"><span class="fb-num">03</span><h3>Presupuesto y pago</h3></div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-presupuesto">Presupuesto máximo</label>
+                <input type="number" id="f-presupuesto" name="presupuesto" inputmode="numeric" min="1000" step="500" placeholder="20.000 €">
+                <p class="hint">Cantidad total que podrías invertir.</p>
+                <p class="field-error">Indícanos un presupuesto orientativo.</p>
+              </div>
+              <div class="field">
+                <label for="f-alcance">Este presupuesto…</label>
+                <select id="f-alcance" name="alcance">
+                  <option selected>Incluye todo (llave en mano)</option>
+                  <option>Solo el vehículo</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-pago">Forma de pago</label>
+                <select id="f-pago" name="pago">
+                  <option value="" selected disabled>Selecciona…</option>
+                  <option>Contado</option>
+                  <option>Financiación</option>
+                  <option>Mixto (entrada + financiación)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-cambio">Coche a cambio <span class="opt">(opcional)</span></label>
+                <input type="text" id="f-cambio" name="cambio" placeholder="Marca, modelo y año (si aplica)">
+              </div>
             </div>
+          </div>
 
-            <div class="field">
-              <label for="f-link">Link al anuncio <span class="opt">(opcional)</span></label>
-              <input type="url" id="f-link" name="link" inputmode="url" placeholder="https://…">
-              <p class="field-error">Ese enlace no parece válido.</p>
+          <!-- 04 · Plazos y observaciones -->
+          <div class="form-block">
+            <div class="form-block-head"><span class="fb-num">04</span><h3>Plazos y observaciones</h3></div>
+            <div class="field field--full">
+              <label id="lbl-plazo">Plazo deseado</label>
+              <div class="chips" id="chips-plazo" role="group" aria-labelledby="lbl-plazo">
+                <button type="button" class="chip" data-value="Urgente · menos de 1 mes">Urgente · &lt;1 mes</button>
+                <button type="button" class="chip" data-value="1 a 3 meses">1 a 3 meses</button>
+                <button type="button" class="chip" data-value="Sin prisa">Sin prisa</button>
+              </div>
             </div>
+            <div class="field field--full">
+              <label for="f-obs">Observaciones</label>
+              <textarea id="f-obs" name="observaciones" placeholder="Cualquier preferencia o detalle que pueda orientar la búsqueda."></textarea>
+            </div>
+          </div>
 
-            <div class="field--full">
-              <button type="submit" class="glass-btn glass-btn--primary form-submit">
-                Enviar por WhatsApp <span class="arrow">→</span>
-              </button>
-              <p class="form-note">Respuesta en menos de 24h. Sin compromiso. Gratis hasta que compres.</p>
-            </div>
+          <div class="field--full">
+            <button type="submit" class="glass-btn glass-btn--primary form-submit">
+              Enviar por WhatsApp <span class="arrow">→</span>
+            </button>
+            <p class="form-note">Respuesta en menos de 24h. Sin compromiso.</p>
           </div>
         </form>
       </div>
@@ -2082,14 +2252,12 @@ if (hasGSAP) {
       }
     });
 
-    tl.add(scrubCount(countEl("68000")))
-      .to(".price-market .strike", { scaleX: 1, duration: .35 })
-      /* immediateRender:false — que el "0 €" no espere borroso antes de su beat */
+    tl.add(scrubCount(countEl("127")))
+      /* immediateRender:false — que el número no espere borroso antes de su beat */
       .fromTo(".price-rci", { skewX: -8, filter: "blur(5px)" },
               { skewX: 0, filter: "blur(0px)", duration: 1, ease: "none", immediateRender: false }, "+=0.1")
-      .add(scrubCount(countEl("63900")), "<")
+      .add(scrubCount(countEl("9")), "<")
       .from(".badge-ahorro", { opacity: 0, scale: .85, duration: .45 })
-      .add(scrubCount(countEl("10")), "<")
       .from(".caso-micro", { opacity: 0, y: 20, duration: .4 })
       .to("#rs3-img", { yPercent: 5, duration: 3, ease: "none" }, 0);
   });
@@ -2122,21 +2290,17 @@ if (hasGSAP) {
       onEnter(){
         if (reduceMotion) {
           setCountsFinal();
-          gsap.set(".price-market .strike", { scaleX: 1 });
           return;
         }
         document.querySelectorAll(".caso-grid .count").forEach(countUpGSAP);
         gsap.fromTo(".price-rci",
           { skewX: -8, filter: "blur(5px)" },
           { skewX: 0, filter: "blur(0px)", duration: 1.6, ease: "power2.out" });
-        gsap.to(".price-market .strike", { scaleX: 1, duration: 0.6, delay: 1.2, ease: "power2.inOut" });
       }
     });
   });
 } else {
   setCountsFinal();
-  const strike = document.querySelector(".price-market .strike");
-  if (strike) strike.style.transform = "scaleX(1)";
 }
 
 /* ============================================================
@@ -2241,14 +2405,42 @@ function setError(input, hasError){
   input.closest(".field").classList.toggle("has-error", hasError);
 }
 
+/* Chips: tipología multi-selección, plazo selección única */
+function setupChips(id, single){
+  const group = document.getElementById(id);
+  if (!group) return;
+  group.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      if (single) {
+        const wasActive = chip.classList.contains("is-active");
+        group.querySelectorAll(".chip").forEach(c => c.classList.remove("is-active"));
+        if (!wasActive) chip.classList.add("is-active");
+      } else {
+        chip.classList.toggle("is-active");
+      }
+    });
+  });
+}
+setupChips("chips-tipo", false);
+setupChips("chips-plazo", true);
+
+const chipValues = id => Array.from(
+  document.querySelectorAll(`#${id} .chip.is-active`)
+).map(c => c.dataset.value).join(" / ");
+
 form.addEventListener("submit", e => {
   e.preventDefault();
 
-  const nombre = form.nombre.value.trim();
-  const tel    = form.whatsapp.value.trim();
-  const coche  = form.coche.value.trim();
-  const presu  = form.presupuesto.value;
-  const link   = form.link.value.trim();
+  const v = id => document.getElementById(id).value.trim();
+  const sel = id => { const el = document.getElementById(id); return el.value && el.value !== "Indiferente" ? el.value : ""; };
+
+  const nombre = v("f-nombre");
+  const tel    = v("f-whatsapp");
+  const email  = v("f-email");
+  const ciudad = v("f-ciudad");
+  const presu  = v("f-presupuesto");
+  const links  = Array.from(document.querySelectorAll(".link-ref"))
+                   .map(i => i.value.trim()).filter(Boolean);
 
   let ok = true;
 
@@ -2257,24 +2449,43 @@ form.addEventListener("submit", e => {
   const telOk = /^[+]?[\d\s().-]{9,17}$/.test(tel);
   setError(form.whatsapp, !telOk); ok = ok && telOk;
 
-  setError(form.coche, coche.length < 3); ok = ok && coche.length >= 3;
+  const emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  setError(form.email, !emailOk); ok = ok && emailOk;
 
-  setError(form.presupuesto, !presu); ok = ok && !!presu;
+  const presuOk = presu !== "" && Number(presu) > 0;
+  setError(form.presupuesto, !presuOk); ok = ok && presuOk;
 
-  const linkOk = !link || /^https?:\/\/.+\..+/.test(link);
-  setError(form.link, !linkOk); ok = ok && linkOk;
+  const linksOk = links.every(l => /^https?:\/\/.+\..+/.test(l));
+  document.querySelector(".links-stack").closest(".field").classList.toggle("has-error", !linksOk);
+  ok = ok && linksOk;
 
   if (!ok) {
     form.querySelector(".has-error input, .has-error textarea, .has-error select")?.focus();
     return;
   }
 
+  const tipos  = chipValues("chips-tipo");
+  const plazo  = chipValues("chips-plazo");
+  const marca  = sel("f-marca");
+  const modelo = v("f-modelo");
+  const cocheLinea = [marca, modelo].filter(Boolean).join(" ");
+
   const lineas = [
-    `Hola, soy ${nombre}.`,
-    `Busco: ${coche}`,
-    `Presupuesto: ${presu}`,
-    link ? `Anuncio de referencia: ${link}` : null,
-    `Mi WhatsApp: ${tel}`
+    `Hola, soy ${nombre}${ciudad ? " (" + ciudad + ")" : ""}. Quiero encargar un coche:`,
+    tipos ? `· Tipología: ${tipos}` : null,
+    cocheLinea ? `· Marca/Modelo: ${cocheLinea}` : null,
+    sel("f-anio") ? `· Año mínimo: ${sel("f-anio")}` : null,
+    sel("f-km") ? `· Km máximo: ${sel("f-km")}` : null,
+    sel("f-combustible") ? `· Combustible: ${sel("f-combustible")}` : null,
+    sel("f-transmision") ? `· Transmisión: ${sel("f-transmision")}` : null,
+    v("f-extras") ? `· Equipamiento: ${v("f-extras")}` : null,
+    `· Presupuesto máximo: ${fmtES.format(Number(presu))} € — ${v("f-alcance")}`,
+    sel("f-pago") ? `· Forma de pago: ${sel("f-pago")}` : null,
+    v("f-cambio") ? `· Coche a cambio: ${v("f-cambio")}` : null,
+    plazo ? `· Plazo: ${plazo}` : null,
+    links.length ? `· Enlaces de referencia:\n${links.map(l => "  " + l).join("\n")}` : null,
+    v("f-obs") ? `· Observaciones: ${v("f-obs")}` : null,
+    `· Contacto: ${tel}${email ? " · " + email : ""}`
   ].filter(Boolean);
 
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lineas.join("\n"))}`;
@@ -2282,7 +2493,10 @@ form.addEventListener("submit", e => {
 });
 
 form.querySelectorAll("input, textarea, select").forEach(el => {
-  el.addEventListener("input", () => setError(el, false));
+  el.addEventListener("input", () => {
+    const field = el.closest(".field");
+    if (field) field.classList.remove("has-error");
+  });
 });
 
 /* Enlaces directos a WhatsApp (flotante + footer) */
