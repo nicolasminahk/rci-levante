@@ -66,6 +66,8 @@ img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 button{ font:inherit; cursor:pointer; }
 b,strong{ font-weight: 600; } /* Inter se carga hasta 600 */
+/* el atributo hidden SIEMPRE gana, aunque la clase defina display */
+[hidden]{ display: none !important; }
 
 /* ---------- Tipografía ---------- */
 h1,h2,h3{
@@ -2741,8 +2743,10 @@ const cocheSel = (function(){
 
   const api = {
     getSeleccion(){
-      if (!freeIn.hidden) return freeIn.value.trim();
-      return [inMarca.value, inModelo.value].filter(Boolean).join(" ");
+      // modo libre visible → su texto; si está vacío, cae a la selección del listado
+      const libre = !freeIn.hidden ? freeIn.value.trim() : "";
+      const seleccion = [inMarca.value, inModelo.value].filter(Boolean).join(" ");
+      return libre || seleccion;
     }
   };
 
@@ -2812,14 +2816,14 @@ const cocheSel = (function(){
   });
 
   function applyFilter(){
-    const q = norm(searchIn.value.trim());
-    if (!q) {
+    /* misma tokenización que el dataset: "t-cross" → ["t","cross"] */
+    const tokens = words(searchIn.value.trim());
+    if (!tokens.length) {
       browse.hidden = false;
       results.hidden = true;
       emptyMsg.hidden = true;
       return;
     }
-    const tokens = q.split(/\s+/);
     let hits = 0;
     flatRows.forEach(row => {
       const rowWords = row.dataset.words.split(" ");
@@ -2836,6 +2840,11 @@ const cocheSel = (function(){
   function selectModel(marca, modelo){
     inMarca.value = marca;
     inModelo.value = modelo;
+    // si estaba en modo libre, volver al modo listado: un solo estado visible
+    freeIn.hidden = true;
+    freeIn.value = "";
+    freeHint.hidden = true;
+    openBtn.hidden = false;
     selText.textContent = `${marca} · ${modelo}`;
     selText.classList.remove("is-placeholder");
     clearBtn.hidden = false;
@@ -2857,6 +2866,9 @@ const cocheSel = (function(){
     clearBtn.hidden = true;
     freeIn.hidden = false;
     freeHint.hidden = false;
+    // arrastrar la selección previa como punto de partida del texto libre
+    const previa = [inMarca.value, inModelo.value].filter(Boolean).join(" ");
+    if (previa && !freeIn.value) freeIn.value = previa;
     inMarca.value = ""; inModelo.value = "";
     setTimeout(() => freeIn.focus(), 50);
   }
@@ -2865,6 +2877,12 @@ const cocheSel = (function(){
     freeIn.hidden = true;
     freeHint.hidden = true;
     openBtn.hidden = false;
+    // sin selección real: el display vuelve al placeholder (nada de estados fantasma)
+    if (!inMarca.value) {
+      selText.textContent = "Ej: Audi RS3";
+      selText.classList.add("is-placeholder");
+      clearBtn.hidden = true;
+    }
     openPicker();
   });
 
@@ -2943,7 +2961,7 @@ setupChips("chips-plazo", true);
 
 const chipValues = id => Array.from(
   document.querySelectorAll(`#${id} .chip.is-active`)
-).map(c => c.dataset.value).join(" / ");
+).map(c => c.dataset.value).join(", ");
 
 form.addEventListener("submit", e => {
   e.preventDefault();
