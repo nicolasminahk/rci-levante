@@ -1115,6 +1115,299 @@ section{ position: relative; padding: 96px 0; }
   font-size: 12.5px;
   color: var(--plata-oscura);
 }
+.linklike{
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--plata);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.linklike:hover{ color: var(--blanco); }
+
+/* ============================================================
+   SELECTOR MARCA/MODELO — campo
+   ============================================================ */
+.cochesel{ position: relative; }
+.cochesel-display{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px 16px;
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  color: var(--blanco);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 250ms ease-out, background 250ms ease-out, box-shadow 250ms ease-out;
+}
+.cochesel-display:hover,
+.cochesel-display:focus-visible{
+  outline: none;
+  border-color: rgba(255,255,255,0.32);
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.cochesel-text.is-placeholder{ color: rgba(138,141,147,.65); }
+.cochesel-chevron{
+  width: 18px; height: 18px;
+  flex: none;
+  color: var(--plata-oscura);
+}
+.cochesel-clear{
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  color: var(--plata);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: color 200ms ease-out, border-color 200ms ease-out;
+}
+.cochesel-clear:hover{ color: var(--rojo-rci); border-color: rgba(216,35,42,.5); }
+
+/* ============================================================
+   SELECTOR MARCA/MODELO — panel
+   ============================================================ */
+body.picker-open{ overflow: hidden; }
+.picker-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(6,6,7,.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 280ms ease-out;
+}
+.picker-backdrop.is-open{ opacity: 1; }
+.picker{
+  position: fixed;
+  z-index: 401;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(.96);
+  width: min(560px, calc(100vw - 32px));
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(18,18,20,.92);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-top);
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06);
+  opacity: 0;
+  transition: opacity 280ms ease-out, transform 280ms ease-out;
+}
+.picker.is-open{ opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.picker-head{
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.picker-search{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+}
+.picker-search:focus-within{ border-color: rgba(255,255,255,.32); }
+.picker-search svg{
+  width: 18px; height: 18px;
+  flex: none;
+  fill: none;
+  stroke: var(--plata-oscura);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.picker-search input{
+  flex: 1;
+  min-width: 0;
+  padding: 13px 0;
+  background: none;
+  border: none;
+  outline: none;
+  font: inherit;
+  font-size: 15px;
+  color: var(--blanco);
+}
+.picker-search input::placeholder{ color: rgba(138,141,147,.65); }
+.picker-close{
+  width: 46px;
+  flex: none;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--plata);
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: color 200ms ease-out, border-color 200ms ease-out;
+}
+.picker-close:hover{ color: var(--blanco); border-color: rgba(255,255,255,.26); }
+.picker-body{
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px 8px 10px;
+}
+.picker-sect{
+  padding: 14px 12px 8px;
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--plata-oscura);
+}
+.brand-row,
+.result-row{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  color: var(--plata);
+  cursor: pointer;
+  transition: background 180ms ease-out, color 180ms ease-out;
+}
+.brand-row:hover, .brand-row:focus-visible,
+.result-row:hover, .result-row:focus-visible{
+  outline: none;
+  background: rgba(255,255,255,.05);
+  color: var(--blanco);
+}
+.monogram{
+  width: 38px; height: 38px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-top);
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--plata);
+}
+.brand-row .chev{
+  margin-left: auto;
+  width: 16px; height: 16px;
+  flex: none;
+  fill: none;
+  stroke: var(--plata-oscura);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 250ms ease-out;
+}
+.brand-row.is-open .chev{ transform: rotate(180deg); }
+.brand-models{
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 12px 0 62px;
+  transition: max-height 350ms ease, opacity 250ms ease-out, padding 250ms ease-out;
+}
+.brand-models.is-open{ opacity: 1; padding-bottom: 14px; }
+.model-chip{
+  padding: 8px 14px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--plata);
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: color 180ms ease-out, border-color 180ms ease-out, background 180ms ease-out;
+}
+.model-chip:hover, .model-chip:focus-visible{
+  outline: none;
+  color: var(--blanco);
+  border-color: rgba(216,35,42,.6);
+  background: rgba(216,35,42,.08);
+}
+.result-row em{
+  font-style: normal;
+  color: var(--plata-oscura);
+}
+.result-row:hover em{ color: var(--plata); }
+.picker-empty{
+  padding: 28px 12px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--plata-oscura);
+}
+.picker-free{
+  padding: 15px 16px;
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--plata-oscura);
+  cursor: pointer;
+  transition: color 200ms ease-out;
+  border-radius: 0 0 20px 20px;
+}
+.picker-free:hover{ color: var(--blanco); }
+.picker-free strong{ color: var(--rojo-rci); font-weight: 600; }
+
+/* Mobile: bottom sheet a casi pantalla completa con subida tipo spring */
+@media (max-width: 767px){
+  .picker{
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    max-height: 90svh;
+    border-radius: 20px 20px 0 0;
+    opacity: 1;
+    transform: translateY(102%);
+    transition: transform 480ms cubic-bezier(.22, 1.18, .36, 1);
+  }
+  .picker.is-open{ transform: translateY(0); }
+  .picker-free{ border-radius: 0; padding-bottom: max(15px, env(safe-area-inset-bottom)); }
+  .brand-models{ padding-left: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .picker, .picker-backdrop, .brand-models, .brand-row .chev{ transition: none !important; }
+}
 .field label{
   display: block;
   font-size: 12px;
@@ -1765,20 +2058,25 @@ section{ position: relative; padding: 96px 0; }
               </div>
             </div>
             <div class="form-grid">
-              <div class="field">
-                <label for="f-marca">Marca preferida</label>
-                <select id="f-marca" name="marca">
-                  <option selected>Indiferente</option>
-                  <option>Audi</option><option>BMW</option><option>Mercedes-Benz</option>
-                  <option>Porsche</option><option>Volkswagen</option><option>Cupra</option>
-                  <option>Seat</option><option>Toyota</option><option>Ford</option>
-                  <option>Peugeot</option><option>Renault</option><option>Kia</option>
-                  <option>Hyundai</option><option>Tesla</option><option>Otra</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="f-modelo">Modelo</label>
-                <input type="text" id="f-modelo" name="modelo" placeholder="RS3, M3, Golf GTI…">
+              <div class="field field--full" id="field-cochesel">
+                <label id="lbl-cochesel">Marca y modelo</label>
+                <div class="cochesel">
+                  <button type="button" class="cochesel-display" id="cochesel-open"
+                          aria-haspopup="dialog" aria-labelledby="lbl-cochesel">
+                    <span class="cochesel-text is-placeholder" id="cochesel-text">Ej: Audi RS3</span>
+                    <svg class="cochesel-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                  <button type="button" class="cochesel-clear" id="cochesel-clear" aria-label="Quitar selección" hidden>✕</button>
+                  <input type="text" id="f-cochelibre" placeholder="Escribe marca y modelo" hidden>
+                </div>
+                <input type="hidden" name="marca" id="f-marca">
+                <input type="hidden" name="modelo" id="f-modelo">
+                <p class="hint" id="cochesel-hint" hidden>
+                  Modo texto libre — <button type="button" class="linklike" id="cochesel-uselist">volver al listado</button>
+                </p>
+                <p class="field-error">Dinos qué coche buscas: elige del listado o escríbelo tú mismo.</p>
               </div>
               <div class="field">
                 <label for="f-anio">Año mínimo</label>
@@ -1814,7 +2112,7 @@ section{ position: relative; padding: 96px 0; }
                 </select>
               </div>
               <div class="field field--full">
-                <label for="f-extras">Equipamiento imprescindible / extras</label>
+                <label for="f-extras">Detalles <span class="opt">(versión, color, equipamiento…)</span></label>
                 <textarea id="f-extras" name="extras" placeholder="Tapicería de cuero, techo panorámico, pack M, navegador, asientos calefactables…"></textarea>
               </div>
               <div class="field field--full">
@@ -1917,6 +2215,29 @@ section{ position: relative; padding: 96px 0; }
   </div>
 </footer>
 
+<!-- Selector marca/modelo -->
+<div class="picker-backdrop" id="picker-backdrop" hidden></div>
+<section class="picker" id="picker" role="dialog" aria-modal="true" aria-label="Elige marca y modelo" hidden>
+  <div class="picker-head">
+    <div class="picker-search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M21 21l-5-5"/></svg>
+      <input type="text" id="picker-input" placeholder="Busca marca o modelo…" autocomplete="off" spellcheck="false" aria-label="Buscar marca o modelo">
+    </div>
+    <button type="button" class="picker-close" id="picker-close" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="picker-body" id="picker-body">
+    <div id="picker-browse">
+      <p class="picker-sect">Marcas más populares</p>
+      <div id="picker-populares"></div>
+      <p class="picker-sect">Todas las marcas</p>
+      <div id="picker-todas"></div>
+    </div>
+    <div id="picker-results" hidden></div>
+    <p class="picker-empty" id="picker-empty" hidden>Sin resultados. Prueba con otro nombre o escríbelo tú mismo.</p>
+  </div>
+  <button type="button" class="picker-free" id="picker-free">¿No lo encuentras? <strong>Escríbelo tú mismo</strong> →</button>
+</section>
+
 <!-- Velocímetro de scroll -->
 <div class="speedo" id="speedo" aria-hidden="true">
   <svg viewBox="0 0 100 100">
@@ -1933,6 +2254,9 @@ section{ position: relative; padding: 96px 0; }
 <a href="#" class="wa-float" id="wa-float" aria-label="Escríbenos por WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.6 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2zm0 18.1c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.5-6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.5 0-.2 0-.3 0-.5s-.6-1.4-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3a3 3 0 0 0-.9 2.2c0 1.3 1 2.6 1.1 2.8.1.2 1.9 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z"/></svg>
 </a>
+
+<!-- Dataset de marcas y modelos (script clásico: funciona con file://) -->
+<script src="data/marcas-modelos.js"></script>
 
 <!-- GSAP 3 + ScrollTrigger (cdnjs) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -2397,6 +2721,199 @@ if (hasGSAP && !reduceMotion) {
 }
 
 /* ============================================================
+   SELECTOR MARCA/MODELO — patrón buscador (mecánica coches.net,
+   estética glass RCI). Render único, filtrado por clases.
+   ============================================================ */
+const cocheSel = (function(){
+  const openBtn  = document.getElementById("cochesel-open");
+  const selText  = document.getElementById("cochesel-text");
+  const clearBtn = document.getElementById("cochesel-clear");
+  const freeIn   = document.getElementById("f-cochelibre");
+  const freeHint = document.getElementById("cochesel-hint");
+  const inMarca  = document.getElementById("f-marca");
+  const inModelo = document.getElementById("f-modelo");
+  const backdrop = document.getElementById("picker-backdrop");
+  const picker   = document.getElementById("picker");
+  const searchIn = document.getElementById("picker-input");
+  const browse   = document.getElementById("picker-browse");
+  const results  = document.getElementById("picker-results");
+  const emptyMsg = document.getElementById("picker-empty");
+
+  const api = {
+    getSeleccion(){
+      if (!freeIn.hidden) return freeIn.value.trim();
+      return [inMarca.value, inModelo.value].filter(Boolean).join(" ");
+    }
+  };
+
+  // Sin dataset (o sin elementos): degradar a texto libre y salir
+  if (typeof MARCAS_MODELOS === "undefined" || !picker || !openBtn) {
+    if (openBtn && freeIn) { openBtn.hidden = true; freeIn.hidden = false; }
+    return api;
+  }
+
+  const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const words = s => norm(s).split(/[\s\-\/&.·]+/).filter(Boolean);
+
+  /* ---------- render único ---------- */
+  const chevSVG = '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+  function brandRow(item){
+    const wrap = document.createElement("div");
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = "brand-row";
+    row.innerHTML = `<span class="monogram">${item.marca[0]}</span><span>${item.marca}</span>${chevSVG}`;
+    const models = document.createElement("div");
+    models.className = "brand-models";
+    item.modelos.forEach(m => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "model-chip";
+      chip.textContent = m;
+      chip.addEventListener("click", () => selectModel(item.marca, m));
+      models.appendChild(chip);
+    });
+    row.addEventListener("click", () => {
+      const open = row.classList.toggle("is-open");
+      models.classList.toggle("is-open", open);
+      models.style.maxHeight = open ? models.scrollHeight + "px" : "0px";
+    });
+    wrap.append(row, models);
+    return wrap;
+  }
+
+  const populares = document.getElementById("picker-populares");
+  const todas = document.getElementById("picker-todas");
+  MARCAS_MODELOS.filter(m => m.popular).forEach(m => populares.appendChild(brandRow(m)));
+  [...MARCAS_MODELOS].sort((a, b) => a.marca.localeCompare(b.marca, "es"))
+    .forEach(m => todas.appendChild(brandRow(m)));
+
+  // Lista plana para el modo búsqueda: "Marca · Modelo"
+  const flatRows = [];
+  MARCAS_MODELOS.forEach(item => {
+    item.modelos.forEach(m => {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "result-row";
+      row.innerHTML = `<span class="monogram">${item.marca[0]}</span><span>${item.marca} <em>· ${m}</em></span>`;
+      row.dataset.words = words(item.marca + " " + m).join(" ");
+      row.addEventListener("click", () => selectModel(item.marca, m));
+      results.appendChild(row);
+      flatRows.push(row);
+    });
+  });
+
+  /* ---------- búsqueda (debounce 120ms, prefijo por palabra) ---------- */
+  let debounce = null;
+  searchIn.addEventListener("input", () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(applyFilter, 120);
+  });
+
+  function applyFilter(){
+    const q = norm(searchIn.value.trim());
+    if (!q) {
+      browse.hidden = false;
+      results.hidden = true;
+      emptyMsg.hidden = true;
+      return;
+    }
+    const tokens = q.split(/\s+/);
+    let hits = 0;
+    flatRows.forEach(row => {
+      const rowWords = row.dataset.words.split(" ");
+      const match = tokens.every(t => rowWords.some(w => w.startsWith(t)));
+      row.style.display = match ? "" : "none";
+      if (match) hits++;
+    });
+    browse.hidden = true;
+    results.hidden = false;
+    emptyMsg.hidden = hits > 0;
+  }
+
+  /* ---------- selección ---------- */
+  function selectModel(marca, modelo){
+    inMarca.value = marca;
+    inModelo.value = modelo;
+    selText.textContent = `${marca} · ${modelo}`;
+    selText.classList.remove("is-placeholder");
+    clearBtn.hidden = false;
+    document.getElementById("field-cochesel").classList.remove("has-error");
+    closePicker();
+  }
+
+  clearBtn.addEventListener("click", () => {
+    inMarca.value = ""; inModelo.value = "";
+    selText.textContent = "Ej: Audi RS3";
+    selText.classList.add("is-placeholder");
+    clearBtn.hidden = true;
+  });
+
+  /* ---------- modo texto libre ---------- */
+  function freeMode(){
+    closePicker();
+    openBtn.hidden = true;
+    clearBtn.hidden = true;
+    freeIn.hidden = false;
+    freeHint.hidden = false;
+    inMarca.value = ""; inModelo.value = "";
+    setTimeout(() => freeIn.focus(), 50);
+  }
+  document.getElementById("picker-free").addEventListener("click", freeMode);
+  document.getElementById("cochesel-uselist").addEventListener("click", () => {
+    freeIn.hidden = true;
+    freeHint.hidden = true;
+    openBtn.hidden = false;
+    openPicker();
+  });
+
+  /* ---------- abrir / cerrar ---------- */
+  function openPicker(){
+    backdrop.hidden = false;
+    picker.hidden = false;
+    document.body.classList.add("picker-open");
+    requestAnimationFrame(() => {
+      backdrop.classList.add("is-open");
+      picker.classList.add("is-open");
+    });
+    setTimeout(() => searchIn.focus(), reduceMotion ? 0 : 200);
+  }
+  function closePicker(){
+    backdrop.classList.remove("is-open");
+    picker.classList.remove("is-open");
+    document.body.classList.remove("picker-open");
+    const hide = () => { backdrop.hidden = true; picker.hidden = true; };
+    reduceMotion ? hide() : setTimeout(hide, 300);
+    if (!freeIn.hidden) return;
+    openBtn.focus({ preventScroll: true });
+  }
+
+  openBtn.addEventListener("click", openPicker);
+  document.getElementById("picker-close").addEventListener("click", closePicker);
+  backdrop.addEventListener("click", closePicker);
+  document.addEventListener("keydown", e => {
+    if (picker.hidden) return;
+    if (e.key === "Escape") { closePicker(); return; }
+    // Navegación con flechas entre filas visibles
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      const focusables = Array.from(picker.querySelectorAll(
+        ".brand-row, .model-chip, .result-row, .picker-free"
+      )).filter(el => el.offsetParent !== null);
+      if (!focusables.length) return;
+      e.preventDefault();
+      const idx = focusables.indexOf(document.activeElement);
+      const next = e.key === "ArrowDown"
+        ? focusables[Math.min(idx + 1, focusables.length - 1)]
+        : (idx <= 0 ? searchIn : focusables[idx - 1]);
+      next.focus();
+    }
+  });
+
+  return api;
+})();
+
+/* ============================================================
    FORMULARIO — validación nativa + WhatsApp
    ============================================================ */
 const form = document.getElementById("pedido-form");
@@ -2452,6 +2969,12 @@ form.addEventListener("submit", e => {
   const emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   setError(form.email, !emailOk); ok = ok && emailOk;
 
+  /* Marca y modelo: obligatorio (selección del listado o texto libre) */
+  const coche = cocheSel.getSeleccion();
+  const cocheOk = coche.length >= 2;
+  document.getElementById("field-cochesel").classList.toggle("has-error", !cocheOk);
+  ok = ok && cocheOk;
+
   const presuOk = presu !== "" && Number(presu) > 0;
   setError(form.presupuesto, !presuOk); ok = ok && presuOk;
 
@@ -2460,25 +2983,24 @@ form.addEventListener("submit", e => {
   ok = ok && linksOk;
 
   if (!ok) {
-    form.querySelector(".has-error input, .has-error textarea, .has-error select")?.focus();
+    form.querySelector(
+      '.has-error input:not([type="hidden"]):not([hidden]), .has-error textarea, .has-error select, .has-error .cochesel-display'
+    )?.focus();
     return;
   }
 
   const tipos  = chipValues("chips-tipo");
   const plazo  = chipValues("chips-plazo");
-  const marca  = sel("f-marca");
-  const modelo = v("f-modelo");
-  const cocheLinea = [marca, modelo].filter(Boolean).join(" ");
 
   const lineas = [
     `Hola, soy ${nombre}${ciudad ? " (" + ciudad + ")" : ""}. Quiero encargar un coche:`,
+    `· Marca y modelo: ${coche}`,
     tipos ? `· Tipología: ${tipos}` : null,
-    cocheLinea ? `· Marca/Modelo: ${cocheLinea}` : null,
     sel("f-anio") ? `· Año mínimo: ${sel("f-anio")}` : null,
     sel("f-km") ? `· Km máximo: ${sel("f-km")}` : null,
     sel("f-combustible") ? `· Combustible: ${sel("f-combustible")}` : null,
     sel("f-transmision") ? `· Transmisión: ${sel("f-transmision")}` : null,
-    v("f-extras") ? `· Equipamiento: ${v("f-extras")}` : null,
+    v("f-extras") ? `· Detalles: ${v("f-extras")}` : null,
     `· Presupuesto máximo: ${fmtES.format(Number(presu))} € — ${v("f-alcance")}`,
     sel("f-pago") ? `· Forma de pago: ${sel("f-pago")}` : null,
     v("f-cambio") ? `· Coche a cambio: ${v("f-cambio")}` : null,
